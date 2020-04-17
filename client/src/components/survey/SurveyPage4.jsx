@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import buttonsCss from '../../css/buttons';
 import actions from '../../redux/actions/actions';
-<<<<<<< HEAD
-import BehavioralChart from '../behavior/chart/BehavioralChart';
-=======
->>>>>>> upstream/master
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,20 +60,6 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: `linear-gradient(45deg, #4760ff, #82a4f8)`,
     },
   },
-<<<<<<< HEAD
-  chartDiv: {
-    display: 'flex',
-    marginTop: 50,
-    justifyContent: 'flex-end',
-  },
-  innerChartDiv: {
-    height: 700,
-  },
-  tagLine: {
-    marginTop: '40px',
-  },
-=======
->>>>>>> upstream/master
 }));
 
 const WellnessSlider = withStyles({

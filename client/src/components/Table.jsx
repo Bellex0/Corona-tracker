@@ -11,27 +11,12 @@ import {
   TableRow,
   FormControlLabel,
   Checkbox,
-<<<<<<< HEAD
-  Typography,
-=======
->>>>>>> upstream/master
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Chart from './Chart';
 import chartType from '../utils/chartType';
 import BehavioralChart from './behavior/chart/BehavioralChart';
 
-<<<<<<< HEAD
-const useStyles = makeStyles(theme => ({
-  tagLine: {
-    marginTop: '40px',
-  },
-  behaveDiv: {
-    height: 700,
-  },
-  feverDiv: {
-    height: 500,
-=======
 const useStyles = makeStyles(() => ({
   behaveDiv: {
     height: 700,
@@ -41,7 +26,6 @@ const useStyles = makeStyles(() => ({
     height: 700,
     overflow: 'auto',
     marginBottom: '10px',
->>>>>>> upstream/master
   },
 }));
 
