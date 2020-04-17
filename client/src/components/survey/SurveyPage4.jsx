@@ -7,7 +7,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import buttonsCss from '../../css/buttons';
 import actions from '../../redux/actions/actions';
+<<<<<<< HEAD
 import BehavioralChart from '../behavior/chart/BehavioralChart';
+=======
+>>>>>>> upstream/master
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,6 +64,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: `linear-gradient(45deg, #4760ff, #82a4f8)`,
     },
   },
+<<<<<<< HEAD
   chartDiv: {
     display: 'flex',
     marginTop: 50,
@@ -72,6 +76,8 @@ const useStyles = makeStyles(theme => ({
   tagLine: {
     marginTop: '40px',
   },
+=======
+>>>>>>> upstream/master
 }));
 
 const WellnessSlider = withStyles({
@@ -188,132 +194,118 @@ const SurveyPage4 = props => {
     <>
       <div className={classes.root}>
         <Grid container justify="center" alignItems="center" spacing={3}>
-            <Grid item xs={12}>
-              <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
-                <b>1: Have you lost interest or pleasure in doing things?</b>
-                <div className={classes.margin} />
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <WellnessSlider
-                name="interest"
-                defaultValue={1}
-                step={0.5}
-                valueLabelDisplay="on"
-                color="secondary"
-                max={5}
-                min={1}
-                aria-labelledby="discrete-slider"
-                marks={marks}
-                onChange={handleChange}
-              />
-              <br />
-              <br />
-
-              <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
-                <b>2: Have you been feeling down, depressed, or hopeless?</b>
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <WellnessSlider
-                name="sadness"
-                defaultValue={1}
-                onChange={handleChange2}
-                color="secondary"
-                aria-labelledby="discrete-slider"
-                valueLabelDisplay="on"
-                step={0.5}
-                min={1}
-                max={5}
-                marks={marks}
-              />
-              <br />
-              <br />
-
-              <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
-                <b>3: Trouble falling or staying asleep, or sleeping too much?</b>
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <WellnessSlider
-                name="sleep"
-                onChange={handleChange3}
-                defaultValue={1}
-                color="secondary"
-                aria-labelledby="discrete-slider"
-                valueLabelDisplay="on"
-                step={0.5}
-                min={1}
-                max={5}
-                marks={marks}
-              />
-              <br />
-              <br />
-
-              <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
-                <b>4: Feeling tired or having little energy?</b>
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <WellnessSlider
-                name="energy"
-                onChange={handleChange4}
-                defaultValue={1}
-                color="secondary"
-                aria-labelledby="discrete-slider"
-                valueLabelDisplay="on"
-                step={0.5}
-                min={1}
-                max={5}
-                marks={marks}
-              />
-              <br />
-              <br />
-
-              <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
-                <b>5: Poor appetite or overeating?</b>
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <WellnessSlider
-                name="energy"
-                onChange={handleChange5}
-                defaultValue={1}
-                color="secondary"
-                aria-labelledby="discrete-slider"
-                valueLabelDisplay="on"
-                step={0.5}
-                min={1}
-                max={5}
-                marks={marks}
-              />
-            </Grid>
+          <Grid item xs={12}>
+            <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
+              <b>1: Have you lost interest or pleasure in doing things?</b>
+              <div className={classes.margin} />
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <WellnessSlider
+              name="interest"
+              defaultValue={1}
+              step={0.5}
+              valueLabelDisplay="on"
+              color="secondary"
+              max={5}
+              min={1}
+              aria-labelledby="discrete-slider"
+              marks={marks}
+              onChange={handleChange}
+            />
             <br />
-            <Grid item xs={12}>
-              <Button onClick={sendBackToPage3} variant="outlined" color="secondary" className={classes.continueButton}>
-                BACK
-              </Button>
-              <Button
-                onClick={submitSurveyPage4}
-                variant="outlined"
-                color="secondary"
-                className={classes.continueButton}
-              >
-                SUBMIT
-              </Button>
-            </Grid>
+            <br />
+
+            <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
+              <b>2: Have you been feeling down, depressed, or hopeless?</b>
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <WellnessSlider
+              name="sadness"
+              defaultValue={1}
+              onChange={handleChange2}
+              color="secondary"
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="on"
+              step={0.5}
+              min={1}
+              max={5}
+              marks={marks}
+            />
+            <br />
+            <br />
+
+            <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
+              <b>3: Trouble falling or staying asleep, or sleeping too much?</b>
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <WellnessSlider
+              name="sleep"
+              onChange={handleChange3}
+              defaultValue={1}
+              color="secondary"
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="on"
+              step={0.5}
+              min={1}
+              max={5}
+              marks={marks}
+            />
+            <br />
+            <br />
+
+            <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
+              <b>4: Feeling tired or having little energy?</b>
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <WellnessSlider
+              name="energy"
+              onChange={handleChange4}
+              defaultValue={1}
+              color="secondary"
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="on"
+              step={0.5}
+              min={1}
+              max={5}
+              marks={marks}
+            />
+            <br />
+            <br />
+
+            <Typography variant="subtitle1" id="discrete-slider" gutterBottom>
+              <b>5: Poor appetite or overeating?</b>
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <WellnessSlider
+              name="energy"
+              onChange={handleChange5}
+              defaultValue={1}
+              color="secondary"
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="on"
+              step={0.5}
+              min={1}
+              max={5}
+              marks={marks}
+            />
+          </Grid>
+          <br />
+          <Grid item xs={12}>
+            <Button onClick={sendBackToPage3} variant="outlined" color="secondary" className={classes.continueButton}>
+              BACK
+            </Button>
+            <Button onClick={submitSurveyPage4} variant="outlined" color="secondary" className={classes.continueButton}>
+              SUBMIT
+            </Button>
+          </Grid>
         </Grid>
-        <div className={classes.chartDiv} />
       </div>
-      <div>
-   
-      </div>
-      <div className={classes.innerChartDiv}>
-       
-      </div>
-      <div className={classes.tagLine}>
-        
-      </div>
+      <div />
     </>
   );
 };

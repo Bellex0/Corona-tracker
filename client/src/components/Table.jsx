@@ -11,13 +11,17 @@ import {
   TableRow,
   FormControlLabel,
   Checkbox,
+<<<<<<< HEAD
   Typography,
+=======
+>>>>>>> upstream/master
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Chart from './Chart';
 import chartType from '../utils/chartType';
 import BehavioralChart from './behavior/chart/BehavioralChart';
 
+<<<<<<< HEAD
 const useStyles = makeStyles(theme => ({
   tagLine: {
     marginTop: '40px',
@@ -27,6 +31,17 @@ const useStyles = makeStyles(theme => ({
   },
   feverDiv: {
     height: 500,
+=======
+const useStyles = makeStyles(() => ({
+  behaveDiv: {
+    height: 700,
+    overflow: 'auto',
+  },
+  feverDiv: {
+    height: 700,
+    overflow: 'auto',
+    marginBottom: '10px',
+>>>>>>> upstream/master
   },
 }));
 
@@ -106,8 +121,20 @@ const LogTable = props => {
             ))}
           </Table>
         </TableContainer>
-        <Chart chartType={chartType.bar} />
+        <div>
+          <FormControlLabel
+            control={<Checkbox checked={feverClicked} onChange={handleChange} color="secondary" name="Fever" />}
+            label="Fever"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={behaveClicked} onChange={handleChange} name="Behavioral" color="secondary" />}
+            label="Behavioral"
+          />
+        </div>
       </div>
+      {renderBehavior}
+      <br />
+      {renderFever}
     </>
   );
 };

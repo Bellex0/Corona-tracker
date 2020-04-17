@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+/* eslint-disable no-console */
+
+>>>>>>> upstream/master
 import React, { useState } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -5,6 +10,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { ResponsiveContainer, Line, LineChart, Tooltip, Legend, YAxis, XAxis, CartesianGrid } from 'recharts';
+<<<<<<< HEAD
+=======
+import { Typography } from '@material-ui/core';
+>>>>>>> upstream/master
 
 const BehavioralChart = props => {
   const { observations } = props;
@@ -52,7 +61,6 @@ const BehavioralChart = props => {
   };
 
   const onMouseDownHandler = (event, type) => {
-    console.info(type, event);
     setActive(type);
   };
 
@@ -82,6 +90,7 @@ const BehavioralChart = props => {
 
   return (
     <>
+<<<<<<< HEAD
       <FormControlLabel
         control={<Checkbox checked={interest} onChange={handleChange} color="primary" name="interest" />}
         label="Interest"
@@ -100,6 +109,30 @@ const BehavioralChart = props => {
       />
       <FormControlLabel
         control={<Checkbox checked={appetite} onChange={handleChange} name="appetite" color="primary" />}
+=======
+      <Typography variant="h4">
+        <b>Behavioral Health History</b>
+      </Typography>
+
+      <FormControlLabel
+        control={<Checkbox checked={interest} onChange={handleChange} color="Secondary" name="interest" />}
+        label="Interest"
+      />
+      <FormControlLabel
+        control={<Checkbox checked={sadness} onChange={handleChange} name="sadness" color="Secondary" />}
+        label="Sadness"
+      />
+      <FormControlLabel
+        control={<Checkbox checked={sleep} onChange={handleChange} name="sleep" color="Secondary" />}
+        label="Sleep"
+      />
+      <FormControlLabel
+        control={<Checkbox checked={energy} onChange={handleChange} name="energy" color="Secondary" />}
+        label="Energy"
+      />
+      <FormControlLabel
+        control={<Checkbox checked={appetite} onChange={handleChange} name="appetite" color="Secondary" />}
+>>>>>>> upstream/master
         label="Appetite"
       />
 
@@ -109,11 +142,19 @@ const BehavioralChart = props => {
             data={behaveData}
             onMouseUp={onMouseUpHandler}
             onMouseMove={onMouseMoveHandler}
+<<<<<<< HEAD
             margin={{ top: 2, right: 30, left: 20, bottom: 5 }}
           >
             <CartesianGrid strokeDasharray="1 1" />
             <XAxis dataKey="name" />
             <YAxis />
+=======
+            margin={{ top: 10, right: 30, left: 20, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="1 1" />
+            <XAxis dx={15} dataKey="name" />
+            <YAxis dy={-4} type="number" domain={[0, 5]} />
+>>>>>>> upstream/master
             <Tooltip />
             <Legend />
             {interestLine}
