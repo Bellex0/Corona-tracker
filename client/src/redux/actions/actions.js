@@ -6,52 +6,70 @@ import {
   fetchObservations,
   resetObservations,
   addObservationToStore,
+  changedObservations,
 } from './observations';
-import { setLoginLoading } from './login';
-import { setNavbarSection } from './navigation';
-import { setDisclaimerAnswerThunk, resetDisclaimerAnswer } from './disclaimer';
 import { selectDate } from './calendar';
 import { setToggleValue, setDetailData, deleteDetailData } from './healthToggle';
 import {
+  setCompleted,
+  setSurveyPage,
   setSurveyPage1,
   setSurveyPage2,
   setSurveyPage3,
   setSurveyPage4,
-  toSurveyPage1,
-  toSurveyPage2,
-  toSurveyPage3,
-  toSurveyPage4,
   clearSurvey,
+  setReminderStatus,
 } from './survey';
-import { setDemographicsComorbiditiesThunk, resetDemographicsComorbidities } from './onboarding';
+import {
+  setDemographicsComorbiditiesThunk,
+  resetDemographicsComorbidities,
+  fetchDemographicsComorbidities,
+  setDisclaimerAnswerThunk,
+  resetDisclaimerAnswer,
+  setSubscribedNumber,
+  fetchSubscribedNumber,
+  unsubscribeNumber,
+  clearResponse,
+  setTempUnit,
+  fetchTempUnit,
+} from './onboarding';
 import { deleteUserDataThunk } from './deleteUserData';
+import { resetQuizScore, setQuizScore, updateQuizScore } from './education';
 
 const actions = {
-  setLoginLoading,
-  setNavbarSection,
   fetchObservations,
   addObservation,
   deleteObservations,
   setDisclaimerAnswerThunk,
+  changedObservations,
+  setSubscribedNumber,
+  fetchSubscribedNumber,
+  unsubscribeNumber,
+  clearResponse,
+  setTempUnit,
+  fetchTempUnit,
   selectDate,
   setToggleValue,
   setDetailData,
   deleteDetailData,
+  setCompleted,
+  setSurveyPage,
   setSurveyPage1,
   setSurveyPage2,
   setSurveyPage3,
   setSurveyPage4,
-  toSurveyPage1,
-  toSurveyPage2,
-  toSurveyPage3,
-  toSurveyPage4,
   clearSurvey,
+  setReminderStatus,
   setDemographicsComorbiditiesThunk,
+  fetchDemographicsComorbidities,
   resetDisclaimerAnswer,
   resetDemographicsComorbidities,
   deleteUserDataThunk,
   resetObservations,
   addObservationToStore,
+  resetQuizScore,
+  setQuizScore,
+  updateQuizScore,
 };
 
 export default actions;

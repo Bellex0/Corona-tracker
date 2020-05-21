@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useBlockstack } from 'react-blockstack';
 import { useHistory } from 'react-router-dom';
@@ -10,6 +10,7 @@ import actions from '../../redux/actions/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    paddingBottom: '20em',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 'auto',
@@ -71,7 +72,7 @@ const WellnessSlider = withStyles({
 const marks = [
   {
     value: 1,
-    label: '😁',
+    label: 'No',
   },
   {
     value: 1.5,
@@ -79,7 +80,7 @@ const marks = [
   },
   {
     value: 2,
-    label: '🙂',
+    label: 2,
   },
   {
     value: 2.5,
@@ -87,7 +88,7 @@ const marks = [
   },
   {
     value: 3,
-    label: '😐',
+    label: 3,
   },
   {
     value: 3.5,
@@ -95,7 +96,7 @@ const marks = [
   },
   {
     value: 4,
-    label: '🙁',
+    label: 4,
   },
   {
     value: 4.5,
@@ -103,72 +104,58 @@ const marks = [
   },
   {
     value: 5,
-    label: '😥',
+    label: 'Yes',
   },
 ];
 
 const SurveyPage4 = props => {
-  const { setSurveyPage4, toSurveyPage3, survey, addObservation, clearSurvey } = props;
+  const {
+    survey,
+    setSurveyPage,
+    setSurveyPage4,
+    setCompleted,
+    addObservation,
+    clearSurvey,
+    surveyPage,
+    interest,
+    sadness,
+    sleep,
+    energy,
+    appetite,
+    tempUnit,
+  } = props;
+
+  const surveyPage4 = {
+    interest,
+    sadness,
+    sleep,
+    energy,
+    appetite,
+  };
+
   const classes = useStyles();
-  const { interest, sadness, sleep, energy, appetite } = props;
   const history = useHistory();
   const { userSession } = useBlockstack();
-  const [interestAnswer, setInterestAnswer] = useState(interest);
-  const [sadAnswer, setSadAnswer] = useState(sadness);
-  const [sleepAnswer, setSleepAnswer] = useState(sleep);
-  const [energyAnswer, setEnergyAnswer] = useState(energy);
-  const [appetiteAnswer, setAppetiteAnswer] = useState(appetite);
-  const handleChange = (evt, value) => {
-    setInterestAnswer(value);
+  const [survey4, setSurvey4] = useState(surveyPage4);
+
+  useEffect(() => {
+    setSurveyPage4(survey4);
+    setCompleted(surveyPage);
+  }, [survey4, setSurveyPage4, setCompleted, surveyPage]);
+
+  const handleAnswer = (value, name) => {
+    setSurvey4({ ...survey4, [name]: value });
   };
 
-  const handleChange2 = (evt, value) => {
-    setSadAnswer(value);
-  };
-
-  const handleChange3 = (evt, value) => {
-    setSleepAnswer(value);
-  };
-
-  const handleChange4 = (evt, value) => {
-    setEnergyAnswer(value);
-  };
-
-  const handleChange5 = (evt, value) => {
-    setAppetiteAnswer(value);
-  };
-
-  const sendBackToPage3 = () => {
-    const currentSurveyState = {
-      interestAnswer,
-      sadAnswer,
-      sleepAnswer,
-      energyAnswer,
-      appetiteAnswer,
-    };
-    toSurveyPage3(currentSurveyState);
+  const goBack = () => {
+    setSurveyPage(surveyPage - 1);
   };
 
   const submitSurveyPage4 = async () => {
-    const surveyPage4 = {
-      interestAnswer,
-      sadAnswer,
-      sleepAnswer,
-      energyAnswer,
-      appetiteAnswer,
-    };
-    survey.nonPhysical.interest = interestAnswer;
-    survey.nonPhysical.sadness = sadAnswer;
-    survey.nonPhysical.sleep = sleepAnswer;
-    survey.nonPhysical.energy = energyAnswer;
-    survey.nonPhysical.appetite = appetiteAnswer;
-
     history.push('/');
-
-    setSurveyPage4(surveyPage4);
-    addObservation(userSession, survey);
+    setSurveyPage(0);
+    addObservation(userSession, survey, tempUnit);
     clearSurvey();
-
     window.localStorage.setItem('surveyCompleted', 'true');
   };
 
@@ -185,7 +172,8 @@ const SurveyPage4 = props => {
           <Grid item xs={12}>
             <WellnessSlider
               name="interest"
-              defaultValue={1}
+              value={interest}
+              onChange={(e, value) => handleAnswer(value, 'interest')}
               step={0.5}
               valueLabelDisplay="on"
               color="secondary"
@@ -193,7 +181,6 @@ const SurveyPage4 = props => {
               min={1}
               aria-labelledby="discrete-slider"
               marks={marks}
-              onChange={handleChange}
             />
             <br />
             <br />
@@ -205,8 +192,8 @@ const SurveyPage4 = props => {
           <Grid item xs={12}>
             <WellnessSlider
               name="sadness"
-              defaultValue={1}
-              onChange={handleChange2}
+              value={sadness}
+              onChange={(e, value) => handleAnswer(value, 'sadness')}
               color="secondary"
               aria-labelledby="discrete-slider"
               valueLabelDisplay="on"
@@ -225,8 +212,8 @@ const SurveyPage4 = props => {
           <Grid item xs={12}>
             <WellnessSlider
               name="sleep"
-              onChange={handleChange3}
-              defaultValue={1}
+              onChange={(e, value) => handleAnswer(value, 'sleep')}
+              value={sleep}
               color="secondary"
               aria-labelledby="discrete-slider"
               valueLabelDisplay="on"
@@ -245,8 +232,8 @@ const SurveyPage4 = props => {
           <Grid item xs={12}>
             <WellnessSlider
               name="energy"
-              onChange={handleChange4}
-              defaultValue={1}
+              onChange={(e, value) => handleAnswer(value, 'energy')}
+              value={energy}
               color="secondary"
               aria-labelledby="discrete-slider"
               valueLabelDisplay="on"
@@ -264,9 +251,9 @@ const SurveyPage4 = props => {
           </Grid>
           <Grid item xs={12}>
             <WellnessSlider
-              name="energy"
-              onChange={handleChange5}
-              defaultValue={1}
+              name="appetite"
+              onChange={(e, value) => handleAnswer(value, 'appetite')}
+              value={appetite}
               color="secondary"
               aria-labelledby="discrete-slider"
               valueLabelDisplay="on"
@@ -278,7 +265,7 @@ const SurveyPage4 = props => {
           </Grid>
           <br />
           <Grid item xs={12}>
-            <Button onClick={sendBackToPage3} variant="outlined" color="secondary" className={classes.continueButton}>
+            <Button onClick={goBack} variant="outlined" color="secondary" className={classes.continueButton}>
               BACK
             </Button>
             <Button onClick={submitSurveyPage4} variant="outlined" color="secondary" className={classes.continueButton}>
@@ -295,7 +282,7 @@ const SurveyPage4 = props => {
 SurveyPage4.propTypes = {
   survey: PropTypes.objectOf(Object).isRequired,
   setSurveyPage4: PropTypes.func.isRequired,
-  toSurveyPage3: PropTypes.func.isRequired,
+  setCompleted: PropTypes.func.isRequired,
   interest: PropTypes.number,
   sadness: PropTypes.number,
   sleep: PropTypes.number,
@@ -303,14 +290,17 @@ SurveyPage4.propTypes = {
   appetite: PropTypes.number,
   addObservation: PropTypes.func.isRequired,
   clearSurvey: PropTypes.func.isRequired,
+  setSurveyPage: PropTypes.func.isRequired,
+  surveyPage: PropTypes.number.isRequired,
+  tempUnit: PropTypes.string.isRequired,
 };
 
 SurveyPage4.defaultProps = {
-  interest: 1,
-  sadness: 1,
-  sleep: 1,
-  energy: 1,
-  appetite: 1,
+  interest: 3,
+  sadness: 3,
+  sleep: 3,
+  energy: 3,
+  appetite: 3,
 };
 
 const mapStateToProps = state => {
@@ -321,15 +311,18 @@ const mapStateToProps = state => {
     sleep: state.surveyReducer.survey.nonPhysical.sleep,
     energy: state.surveyReducer.survey.nonPhysical.energy,
     appetite: state.surveyReducer.survey.nonPhysical.appetite,
+    surveyPage: state.surveyReducer.surveyPage,
+    tempUnit: state.onboardingReducer.tempUnit,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    setSurveyPage: page => dispatch(actions.setSurveyPage(page)),
     setSurveyPage4: survey => dispatch(actions.setSurveyPage4(survey)),
-    toSurveyPage3: survey => dispatch(actions.toSurveyPage3(survey)),
-    addObservation: (userSession, survey) => dispatch(actions.addObservation(userSession, survey)),
+    addObservation: (userSession, survey, tempUnit) => dispatch(actions.addObservation(userSession, survey, tempUnit)),
     clearSurvey: () => dispatch(actions.clearSurvey()),
+    setCompleted: page => dispatch(actions.setCompleted(page)),
   };
 };
 

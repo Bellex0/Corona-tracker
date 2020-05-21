@@ -7,22 +7,31 @@ import Chart from '../components/Chart';
 
 const mockStore = configureMockStore([thunk]);
 
-const mockChartJsState = {
-  temperature: {
-    labels: ['2020-02-28', '2020-03-2', '2020-03-4', '2020-03-5', '2020-03-9'],
-    values: [80, 70, 56, 90, 55],
-  },
-};
-
 const mockObservationsReducerState = {
   observations: [],
+};
+const mockOnboardReducerState = {
+  demographicsComorbidities: {
+    age: '',
+    gender: '',
+    city: '',
+    state: '',
+    zip: '',
+    isSmoker: '',
+    isObese: '',
+    isAsthmatic: '',
+  },
+  disclaimerAnswer: false,
+  phoneNumber: { subscribedNumber: null, error: {}, success: '' },
+  showOnboard: false,
+  tempUnit: 'fahrenheit',
 };
 
 describe('Chart', () => {
   it('should render a Chart component ', () => {
     const store = mockStore({
-      temperatureReducer: mockChartJsState,
       observationsReducer: mockObservationsReducerState,
+      onboardingReducer: mockOnboardReducerState,
     });
     window.HTMLCanvasElement.prototype.getContext = () => {};
 

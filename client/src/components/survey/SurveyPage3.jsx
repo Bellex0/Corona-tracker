@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Button, TextField, Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -28,62 +28,47 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SurveyPage3 = props => {
-  const { setSurveyPage3, survey, toSurveyPage2 } = props;
+  const { setSurveyPage, surveyPage, setSurveyPage3, survey, setCompleted } = props;
   const { nonPhysical } = survey;
   const classes = useStyles();
   const [openComment, setOpenComment] = useState(nonPhysical.openComment || '');
 
+  useEffect(() => {
+    setSurveyPage3({ openComment });
+    setCompleted(surveyPage);
+  }, [openComment, setSurveyPage3, setCompleted, surveyPage]);
+
   const handleopenComment = value => {
     setOpenComment(value);
+    setSurveyPage3({ openComment: value });
   };
 
-  const sendBackToPage2 = () => {
-    toSurveyPage2({ openComment });
-  };
-
-  const surveyPage3 = {
-    openComment,
-  };
-
-  const openSurveyPage4 = () => {
-    setSurveyPage3(surveyPage3);
-  };
-
-  const submitSurveyPage3 = async () => {
-    survey.nonPhysical.openComment = openComment;
-
-    setSurveyPage3({
-      openComment,
-    });
-
-    setSurveyPage3(surveyPage3);
+  const goBack = () => {
+    setSurveyPage(surveyPage - 1);
   };
 
   const submitButton = () => {
-    submitSurveyPage3();
-    openSurveyPage4();
+    setSurveyPage(surveyPage + 1);
   };
 
   return (
     <div className={classes.root}>
       <Grid container justify="center" spacing={1} className={classes.grid}>
         <Typography>
-          <b>Q6: Anything else you want to add?</b>
-        </Typography>
-        <Typography>
-          <b>Loss of smell or taste, headache, diarrhea, nausea, vomiting, abdominal pain, etc.</b>
+          <b>Q6: Anything other symptoms or comments you want to add?</b>
         </Typography>
         <Grid container justify="center" spacing={1} className={classes.grid}>
-          <Grid item xs={12} xl={4}>
+          <Grid item xs={12}>
             <TextField
               variant="outlined"
+              placeholder="e.g. loss of smell or taste"
               className={classes.additionalComments}
               defaultValue={openComment}
               onChange={e => handleopenComment(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
-            <Button onClick={sendBackToPage2} variant="outlined" color="secondary" className={classes.continueButton}>
+            <Button onClick={goBack} variant="outlined" color="secondary" className={classes.continueButton}>
               BACK
             </Button>
             <Button onClick={submitButton} color="secondary" className={classes.continueButton}>
@@ -98,19 +83,23 @@ const SurveyPage3 = props => {
 SurveyPage3.propTypes = {
   setSurveyPage3: PropTypes.func.isRequired,
   survey: PropTypes.objectOf(Object).isRequired,
-  toSurveyPage2: PropTypes.func.isRequired,
+  setSurveyPage: PropTypes.func.isRequired,
+  surveyPage: PropTypes.number.isRequired,
+  setCompleted: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
     survey: state.surveyReducer.survey,
+    surveyPage: state.surveyReducer.surveyPage,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     setSurveyPage3: survey => dispatch(actions.setSurveyPage3(survey)),
-    toSurveyPage2: survey => dispatch(actions.toSurveyPage2(survey)),
+    setSurveyPage: page => dispatch(actions.setSurveyPage(page)),
+    setCompleted: page => dispatch(actions.setCompleted(page)),
   };
 };
 
